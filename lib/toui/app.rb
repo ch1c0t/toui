@@ -2,14 +2,16 @@ module Toui
   class App
     def initialize &block
       @elements = []
-
-      @screen = Screen.new
-      @context = Object.new
+      @screen, @context = Screen.new, Object.new
 
       instance_exec &block
+
+      @screen.elements = @elements
     end
 
     def run
+      @screen.clear
+
       loop do
         current_input << Keyboard.next
         @screen.update

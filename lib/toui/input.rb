@@ -4,16 +4,21 @@ module Toui
 
     def initialize name:, block:, context:
       super
-      @text, @keys = String.new, {}
+      @visible, @keys = true, {}
       instance_exec &block
     end
 
     def << key
-      if key.is_a? String && key.match? /[[:print:]]/
-        @text << key
-      else
-        action = @keys[key] || @keys[:any]
+      case key
+      when "\u0003" # C-c
+        exit
+      when "\u0015" # C-u
+        @text = String.new
+      when Symbol
+        action = @keys[key]
         @context.instance_exec &action if action
+      when /[[:print:]]/
+        @text << key
       end
     end
 
@@ -21,7 +26,6 @@ module Toui
       @keys[key] = action
     end
 
-    attr_accessor :text
     def to_s
       @text
     end
