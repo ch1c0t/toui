@@ -7,7 +7,8 @@ module Toui
       @visible = true
       @keys = {
         [:ctrl, ?c] => -> { exit },
-        [:ctrl, ?u] => -> { own.text = String.new }
+        [:ctrl, ?u] => -> { own.text = String.new },
+        backspace: -> { own.text = own.text[0..-2] }
       }
       instance_exec &block
     end
