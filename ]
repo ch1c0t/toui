@@ -14,10 +14,9 @@ module Toui
 
     def << key
       case key
-      when Symbol, Array
+      when Symbol
         action = @keys[key]
-        @context.own = self
-        @context.instance_exec &action if action
+        @context[self].instance_exec &wrap(action) if action
       when /[[:print:]]/
         @text << key
       end
@@ -30,5 +29,10 @@ module Toui
     def to_s
       @text
     end
+
+    private
+      def wrap action
+        -> self { instance_exec &action }
+      end
   end
 end

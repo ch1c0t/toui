@@ -6,6 +6,10 @@ module Toui
               :enter
             when "\t"
               :tab
+            when "\u0003"
+              [:ctrl, ?c]
+            when "\u0015"
+              [:ctrl, ?u]
             else
               key
             end

@@ -1,8 +1,11 @@
 module Toui
   class App
+    class Context
+      attr_accessor :own
+    end
     def initialize &block
       @elements = []
-      @screen, @context = Screen.new, Object.new
+      @screen, @context = Screen.new, Context.new
 
       instance_exec &block
 
