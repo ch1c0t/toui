@@ -13,7 +13,7 @@ module Toui
     end
 
     def run
-      @screen.clear
+      @screen.update
 
       loop do
         current_input << Keyboard.next

@@ -1,5 +1,6 @@
 module Toui
   module Element
+    attr_reader :cursor
     attr_accessor :text
     def initialize name:, block:, context:
       @name, @block, @context = name, block, context

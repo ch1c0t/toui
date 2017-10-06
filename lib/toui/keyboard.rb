@@ -10,6 +10,10 @@ module Toui
               [:ctrl, ?c]
             when "\u0015"
               [:ctrl, ?u]
+            when "\u0001"
+              [:ctrl, ?a]
+            when "\u0005"
+              [:ctrl, ?e]
             when "\u007F"
               :backspace
             else
